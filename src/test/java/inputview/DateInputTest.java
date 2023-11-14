@@ -1,12 +1,11 @@
 package inputview;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class InputViewTest {
+public class DateInputTest {
 
     @DisplayName("입력받은 날짜에 대한 확인 메소드 호출")
     @Test
@@ -47,7 +46,7 @@ public class InputViewTest {
 
     private boolean isInteger(String date1) {
         try {
-            int data = Integer.parseInt(date1);
+            Integer.parseInt(date1);
             return true;
         }catch (NumberFormatException e){
             return false;
