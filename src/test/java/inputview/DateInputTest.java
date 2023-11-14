@@ -10,9 +10,10 @@ public class DateInputTest {
     @DisplayName("입력받은 날짜에 대한 확인 메소드 호출")
     @Test
     void readDate() {
+        // 정수로 날짜가 입력되었는가?
         String Date1 = "5일";
         checkInt(Date1);
-
+        // 1~31일의 범주 숫자로 날짜가 입력되었는가?
         String Date2 = "32";
         checkDateRange(Date2);
 

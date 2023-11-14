@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MenuInputTest {
-
+    @DisplayName("입력처리를 위한 메소드 호출")
     @Test
     void readMenu() {
         // 주어진 형식으로 메뉴를 입력했나?
@@ -44,11 +44,11 @@ public class MenuInputTest {
     private void checkOnlyDrink(String menuInput7) {
         assertThatThrownBy(()->{
             if(!isOnlyDrink(menuInput7)) {
-                throw new IllegalArgumentException("존재하지 않는 메뉴가 입력되었습니다.");
+                throw new IllegalArgumentException("음료만 주문은 불가합니다.");
             }
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("존재하지 않는 메뉴가 입력되었습니다.");
+                .hasMessage("음료만 주문은 불가합니다.");
 
     }
 
