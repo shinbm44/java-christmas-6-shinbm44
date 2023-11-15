@@ -31,11 +31,21 @@ public class Run {
         System.out.println();
 
         System.out.println("<총 혜택 금액>");
-        System.out.println("-"+format.format(discount.discountAmount)+"원");
+        if(discount.discountAmount !=0){
+            System.out.println("-"+format.format(discount.discountAmount)+"원");
+        }
+        if(discount.discountAmount ==0){
+            System.out.println("없음");
+        }
         System.out.println();
 
         System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println( format.format(discountBeforeMoney.totalPay - discount.discountAmount + Menu.valueOf("샴페인").getPrice())+ "원");
+        if(discountBeforeMoney.checkGift == true){
+            System.out.println( format.format(discountBeforeMoney.totalPay - discount.discountAmount + Menu.valueOf("샴페인").getPrice())+ "원");
+        }
+        if(discountBeforeMoney.checkGift == false){
+            System.out.println( format.format(discountBeforeMoney.totalPay - discount.discountAmount) + "원");
+        }
         System.out.println();
 
         System.out.println("<12월 이벤트 배지>");

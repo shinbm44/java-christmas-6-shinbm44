@@ -15,10 +15,13 @@ public class ChrismasEvent {
 
 
     public static class EventInfo {
-        public final int discountAmount;
+        public static int discountAmount = 0;
 
         EventInfo( int discountAmount){
             this.discountAmount = discountAmount;
+            if(EventInfo.discountAmount == 0){
+                System.out.println("없음");
+            }
         }
     }
 
@@ -30,6 +33,7 @@ public class ChrismasEvent {
             return calculateEventDiscount(dayGap, menuList);
         }
         System.out.println("없음");
+
         return new EventInfo(0);
     }
 
@@ -42,7 +46,7 @@ public class ChrismasEvent {
         int DayEventDiscount = checkDayEventDiscount(dayGap, menuList);
         int specialDiscount = checkSpecialDiscount(dayGap);
         PrintGiftStatus(discountBeforeMoney.checkGift);
-        if(discountBeforeMoney.checkEventAble == true) {
+        if(discountBeforeMoney.checkGift == true) {
             return new EventInfo(DdayDiscount + DayEventDiscount + specialDiscount + 25000);
         }
         return new EventInfo(DdayDiscount + DayEventDiscount + specialDiscount);
@@ -74,6 +78,7 @@ public class ChrismasEvent {
                 discountSum += Integer.parseInt(menuInfo[1].trim()) * 2023;
             }
         }
+        if (discountSum == 0) {return discountSum;}
         System.out.printf("주말 할인: -"+format.format(discountSum)+"원");
         System.out.println();
         return discountSum;
@@ -89,9 +94,10 @@ public class ChrismasEvent {
                 discountSum += Integer.parseInt(menuInfo[1].trim()) * 2023;
             }
         }
+        if (discountSum == 0) {return discountSum;}
         System.out.printf("평일 할인: -"+format.format(discountSum)+"원");
         System.out.println();
-        return discountSum;
+        return  discountSum;
     }
 
     private int checkSpecialDiscount(int dayGap) {
@@ -100,15 +106,17 @@ public class ChrismasEvent {
         if(Integer.parseInt(dayOfWeek) == 7 || dayGap == 25){
             System.out.printf("특별 할인: -"+format.format(1000)+"원");
             System.out.println();
+            return 1000;
         }
-        return 1000;
+        return 0;
     }
 
     private int checkDdayDiscount(int dayGap) {
         if (dayGap <=25 ) {
             System.out.printf("크리스마스 디데이 할인: -"+format.format((dayGap * 100)+900)+"원");
             System.out.println();
+            return (dayGap * 100)+900;
         }
-        return (dayGap * 100)+900;
+        return 0;
     }
 }
