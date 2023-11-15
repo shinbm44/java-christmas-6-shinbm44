@@ -17,18 +17,31 @@ public class MenuInput {
     }
 
     private void readMenu() {
-        // 주어진 형식으로 입력 받았는가?
-        checkMenuFormat();
-        // 메뉴의 개수를 양의 정수로 입력했나?
-        checkMenuInputInt();
-        // 최대 20개를 넘지 않는 범주로 주문했나?
-        checkMenuInputRange();
-        // 중복 메뉴를 입력하지 않았는가?
-        checkMenuDuplication();
-        // 존재하지 않는 메뉴가 입력되지 않았는가?
-        checkNotInMenu();
-        // 음료만 주문하지 않았는가?
-        checkOnlyDrink();
+        checkError();
+    }
+
+    private void checkError() {
+        while(true){
+            try{
+                // 주어진 형식으로 입력 받았는가?
+                checkMenuFormat();
+                // 메뉴의 개수를 양의 정수로 입력했나?
+                checkMenuInputInt();
+                // 최대 20개를 넘지 않는 범주로 주문했나?
+                checkMenuInputRange();
+                // 중복 메뉴를 입력하지 않았는가?
+                checkMenuDuplication();
+                // 존재하지 않는 메뉴가 입력되지 않았는가?
+                checkNotInMenu();
+                // 음료만 주문하지 않았는가?
+                checkOnlyDrink();
+                break;
+            } catch (IllegalArgumentException e){
+                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                MenuInput.menu = changeMenu();
+                MenuInput.menuDivide = menu.split(",");
+            }
+        }
     }
 
     private void checkOnlyDrink()  {

@@ -109,5 +109,4 @@ public class ChrismasEvent {
         }
         return (dayGap * 100)+900;
     }
-
 }
