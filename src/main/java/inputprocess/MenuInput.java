@@ -9,26 +9,25 @@ import java.util.List;
 import java.util.Set;
 
 public class MenuInput {
+
     public static String menu;
     public static String [] menuDivide;
 
     public MenuInput() {
-        readMenu();
-    }
-
-    private void readMenu() {
         checkError();
     }
 
     private void checkError() {
         while(true){
             try{
+                menu = changeMenu();
+                menuDivide = menu.split(",");
                 // 주어진 형식으로 입력 받았는가?
                 checkMenuFormat();
                 // 메뉴의 개수를 양의 정수로 입력했나?
                 checkMenuInputInt();
                 // 최대 20개를 넘지 않는 범주로 주문했나?
-                checkMenuInputRange();
+                checkMenuInputRange(menuDivide);
                 // 중복 메뉴를 입력하지 않았는가?
                 checkMenuDuplication();
                 // 존재하지 않는 메뉴가 입력되지 않았는가?
@@ -38,23 +37,12 @@ public class MenuInput {
                 break;
             } catch (IllegalArgumentException e){
                 System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                MenuInput.menu = changeMenu();
-                MenuInput.menuDivide = menu.split(",");
             }
         }
     }
 
     private void checkOnlyDrink()  {
-        while(true){
-            try{
-                isOnlyDrink(menuDivide);
-                break;
-            } catch (IllegalArgumentException e){
-                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                MenuInput.menu = changeMenu();
-                MenuInput.menuDivide = menu.split(",");
-            }
-        }
+        isOnlyDrink(menuDivide);
     }
 
     private void isOnlyDrink(String[] menuDivide) {
@@ -73,16 +61,7 @@ public class MenuInput {
     }
 
     private void checkNotInMenu() {
-        while(true){
-            try{
-                isExistMenu(menuDivide);
-                break;
-            } catch (IllegalArgumentException e){
-                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                MenuInput.menu = changeMenu();
-                MenuInput.menuDivide = menu.split(",");
-            }
-        }
+        isExistMenu(menuDivide);
     }
 
     private void isExistMenu(String[] menuDivide) {
@@ -98,16 +77,7 @@ public class MenuInput {
     }
 
     private void checkMenuDuplication() {
-        while(true){
-            try{
-                isRepeat(menuDivide);
-                break;
-            } catch (IllegalArgumentException e){
-                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                MenuInput.menu = changeMenu();
-                MenuInput.menuDivide = menu.split(",");
-            }
-        }
+        isRepeat(menuDivide);
     }
 
     private void isRepeat(String[] menuDivide) throws IllegalArgumentException  {
@@ -130,30 +100,8 @@ public class MenuInput {
         return true;
     }
 
-    private void checkMenuInputRange() {
-        while(true){
-            try{
-                checkMenuRange(menuDivide);
-                break;
-            } catch (IllegalArgumentException e){
-                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                MenuInput.menu = changeMenu();
-                MenuInput.menuDivide = menu.split(",");
-            }
-        }
-    }
-
-    private void checkMenuRange(String[] menuDivide) {
-        while(true) {
-            try{
-                ValidRange(menuDivide);
-                break;
-            } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                MenuInput.menu = changeMenu();
-                MenuInput.menuDivide = menu.split(",");
-            }
-        }
+    private void checkMenuInputRange(String[] menuDivide) {
+        ValidRange(menuDivide);
     }
 
     private void ValidRange(String[] menuDivide) throws IllegalArgumentException {
@@ -161,7 +109,6 @@ public class MenuInput {
         for(String item : menuDivide ) {
             String[] parts = item.split("-");
             String quantity = parts[1].trim();
-
             int menuQuantity = Integer.parseInt(quantity);
             total += menuQuantity;
         }
@@ -171,16 +118,8 @@ public class MenuInput {
     }
 
     private void checkMenuInputInt() {
-        while(true){
-            try{
-                isPlusInt(menuDivide);
-                break;
-            }catch (IllegalArgumentException e){
-                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                MenuInput.menu = changeMenu();
-                MenuInput.menuDivide = menu.split(",");
-            }
-        }
+        isPlusInt(menuDivide);
+
     }
 
     private void isPlusInt(String[] menuDivide) {
@@ -212,15 +151,12 @@ public class MenuInput {
     }
 
     private void checkMenuFormat() {
-       while(true) {
-           try {
-               MenuInput.menu = changeMenu();
-               MenuInput.menuDivide = menu.split(",");
-               break;
-           } catch (IllegalArgumentException e){
-               System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-           }
-       }
+        for (String item : menuDivide) {
+            String[] parts = item.split("-");
+            if (parts.length != 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+        }
     }
 
     private String changeMenu()  {

@@ -37,5 +37,6 @@ public class Run {
         System.out.println();
         System.out.println("<12월 이벤트 배지>");
         System.out.println(new GetBadge(discount.discountAmount));
+        System.out.println();
     }
 }
