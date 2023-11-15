@@ -3,13 +3,13 @@ package outputprocess;
 import inputprocess.MenuInput;
 import menu.Menu;
 
-public class BeforeDiscountMoney {
+public class discountBeforeMoney {
     public static boolean checkGift;
     public static boolean checkEventAble;
     public static int totalPay;
     String [] menuList = MenuInput.menuDivide;
 
-    public BeforeDiscountMoney() {
+    public discountBeforeMoney() {
         // 할인 전 지불의 총합
         moneySum(menuList);
         // 만원 이상 구매했나?
@@ -23,11 +23,13 @@ public class BeforeDiscountMoney {
     private void checkGiftAble(int totalPay) {
         if (totalPay >= 120000 ){
             this.checkGift = true;
+            System.out.println();
             System.out.println("<증정 메뉴>");
             System.out.println("샴페인 1개");
             return;
         }
         this.checkGift = false;
+        System.out.println();
         System.out.println("<증정 메뉴>");
         System.out.println("없음");
     }

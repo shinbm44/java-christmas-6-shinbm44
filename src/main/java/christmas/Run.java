@@ -2,7 +2,9 @@ package christmas;
 
 import inputprocess.DateInput;
 import inputprocess.MenuInput;
-import outputprocess.BeforeDiscountMoney;
+import menu.Menu;
+import outputprocess.discountBeforeMoney;
+import outputprocess.ChrismasEvent;
 import outputprocess.OrderMenuPrint;
 
 public class Run {
@@ -18,7 +20,18 @@ public class Run {
         System.out.println();
         OrderMenuPrint menuPrint = new OrderMenuPrint();
         System.out.println();
-        BeforeDiscountMoney beforeMoney = new BeforeDiscountMoney();
+        discountBeforeMoney beforeMoney = new discountBeforeMoney();
+        System.out.println();
+        System.out.println("<혜택 내역>");
+        ChrismasEvent.EventInfo discount = new ChrismasEvent().getEventInfo( DateInput.getDate());
+        System.out.println();
+        System.out.println();
+        System.out.println("<총 혜택 금액>");
+        System.out.printf("-%d원",discount.discountAmount);
+        System.out.println();
+        System.out.println();
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.printf("%d원", discountBeforeMoney.totalPay - discount.discountAmount + Menu.valueOf("샴페인").getPrice());
 
     }
 }
