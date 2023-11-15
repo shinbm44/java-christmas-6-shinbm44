@@ -16,6 +16,17 @@ public class OrderMoneySum {
         int payMoney = checkEventAble(menuInput);
         assertThat(payMoney).isEqualTo(335000);
 
+        boolean gift = chenkGiveGift(payMoney);
+        assertThat(gift).isEqualTo(true);
+    }
+
+    @DisplayName("증정품 부여 여부")
+    @Test
+    private boolean chenkGiveGift(int payMoney) {
+        if (payMoney >= 120000) {
+            return true;
+        }
+        return  false;
     }
 
     @DisplayName("총 주문금액 계산")
