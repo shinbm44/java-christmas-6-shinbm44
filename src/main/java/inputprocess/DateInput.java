@@ -7,6 +7,10 @@ import java.util.InputMismatchException;
 public class DateInput {
     private static int date;
 
+    public static int getDate() {
+        return date;
+    }
+
     public DateInput() {
         readDate(date);
     }
