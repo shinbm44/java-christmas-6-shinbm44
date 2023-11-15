@@ -8,8 +8,11 @@ import outputprocess.discountBeforeMoney;
 import outputprocess.ChrismasEvent;
 import outputprocess.OrderMenuPrint;
 
+import java.text.DecimalFormat;
+
 public class Run {
     public static void main(String[] args) {
+        DecimalFormat format = new DecimalFormat("###,###");
         System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
         System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
 
@@ -26,15 +29,15 @@ public class Run {
         System.out.println("<혜택 내역>");
         ChrismasEvent.EventInfo discount = new ChrismasEvent().getEventInfo(DateInput.getDate());
         System.out.println();
-        System.out.println();
+
         System.out.println("<총 혜택 금액>");
-        System.out.printf("-%d원",discount.discountAmount);
+        System.out.println("-"+format.format(discount.discountAmount)+"원");
         System.out.println();
-        System.out.println();
+
         System.out.println("<할인 후 예상 결제 금액>");
-        System.out.printf("%d원", discountBeforeMoney.totalPay - discount.discountAmount + Menu.valueOf("샴페인").getPrice());
+        System.out.println( format.format(discountBeforeMoney.totalPay - discount.discountAmount + Menu.valueOf("샴페인").getPrice())+ "원");
         System.out.println();
-        System.out.println();
+
         System.out.println("<12월 이벤트 배지>");
         System.out.println(new GetBadge(discount.discountAmount));
         System.out.println();

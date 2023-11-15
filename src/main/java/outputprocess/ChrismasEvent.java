@@ -2,9 +2,11 @@ package outputprocess;
 import inputprocess.MenuInput;
 import menu.Menu;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 public class ChrismasEvent {
+    DecimalFormat format = new DecimalFormat("###,###");
     String [] menuList = MenuInput.menuDivide;
 
     private final LocalDate startDate = LocalDate.of(2023, 12, 1);
@@ -48,7 +50,7 @@ public class ChrismasEvent {
 
     private void PrintGiftStatus(boolean checkGift) {
         if (checkGift == true) {
-            System.out.printf("증정 이벤트: -%d원", Menu.valueOf("샴페인").getPrice());
+            System.out.println("증정 이벤트: -"+format.format(Menu.valueOf("샴페인").getPrice())+"원");
             return;
         }
     }
@@ -72,7 +74,7 @@ public class ChrismasEvent {
                 discountSum += Integer.parseInt(menuInfo[1].trim()) * 2023;
             }
         }
-        System.out.printf("주말 할인: -%d원",discountSum);
+        System.out.printf("주말 할인: -"+format.format(discountSum)+"원");
         System.out.println();
         return discountSum;
     }
@@ -87,7 +89,7 @@ public class ChrismasEvent {
                 discountSum += Integer.parseInt(menuInfo[1].trim()) * 2023;
             }
         }
-        System.out.printf("평일 할인: -%d원",discountSum);
+        System.out.printf("평일 할인: -"+format.format(discountSum)+"원");
         System.out.println();
         return discountSum;
     }
@@ -96,7 +98,7 @@ public class ChrismasEvent {
         LocalDate reserveDate = LocalDate.of(2023, 12, dayGap);
         String dayOfWeek = String.valueOf((reserveDate.getDayOfWeek().getValue()));
         if(Integer.parseInt(dayOfWeek) == 7 || dayGap == 25){
-            System.out.printf("특별 할인: -%d원",1000);
+            System.out.printf("특별 할인: -"+format.format(1000)+"원");
             System.out.println();
         }
         return 1000;
@@ -104,7 +106,7 @@ public class ChrismasEvent {
 
     private int checkDdayDiscount(int dayGap) {
         if (dayGap <=25 ) {
-            System.out.printf("크리스마스 디데이 할인: -%d원", (dayGap * 100)+900);
+            System.out.printf("크리스마스 디데이 할인: -"+format.format((dayGap * 100)+900)+"원");
             System.out.println();
         }
         return (dayGap * 100)+900;

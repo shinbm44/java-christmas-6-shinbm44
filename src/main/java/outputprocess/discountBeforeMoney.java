@@ -3,7 +3,10 @@ package outputprocess;
 import inputprocess.MenuInput;
 import menu.Menu;
 
+import java.text.DecimalFormat;
+
 public class discountBeforeMoney {
+    DecimalFormat format = new DecimalFormat("###,###");
     public static boolean checkGift;
     public static boolean checkEventAble;
     public static int totalPay;
@@ -35,7 +38,7 @@ public class discountBeforeMoney {
     }
 
     private void printMoney(int totalPay) {
-        System.out.printf("%d원", totalPay);
+        System.out.printf(format.format(totalPay)+"원");
         System.out.println();
     }
 
