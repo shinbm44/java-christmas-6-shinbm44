@@ -2,6 +2,7 @@ package christmas;
 
 import inputprocess.DateInput;
 import inputprocess.MenuInput;
+import outputprocess.BeforeDiscountMoney;
 import outputprocess.OrderMenuPrint;
 
 public class Run {
@@ -16,6 +17,8 @@ public class Run {
         System.out.println();
         System.out.println();
         OrderMenuPrint menuPrint = new OrderMenuPrint();
+        System.out.println();
+        BeforeDiscountMoney beforeMoney = new BeforeDiscountMoney();
 
     }
 }
