@@ -28,6 +28,8 @@ public class BeforeDiscountMoney {
             return;
         }
         this.checkGift = false;
+        System.out.println("<증정 메뉴>");
+        System.out.println("없음");
     }
 
     private void printMoney(int totalPay) {
